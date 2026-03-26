@@ -9,31 +9,26 @@
 <body>
     <div class = "main w-full min-h-screen bg-zinc-800">
         <div class = "form p-10 text-white">
-            <form action="">
-                <input class="block w-full rounded-md outline-none px-5 py-2 bg-zinc-600" type = "text" placeholder = "Title goes here...">
-                <textarea class="block w-full rounded-md outline-none mt-2 px-5 py-2 resize-none bg-zinc-600" placeholder="Write your text/task details here"></textarea>
+            <form action="/create" method = "post">
+                <input class="block w-full rounded-md outline-none px-5 py-2 bg-zinc-600" type = "text" placeholder = "Title goes here..." name = "title">
+                <textarea class="block w-full rounded-md outline-none mt-2 px-5 py-2 resize-none bg-zinc-600" placeholder="Write your text/task details here" name = "details"></textarea>
                 <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type = "Submit" value = "Create Task">
             </form>
         </div>
         <div class = "tasks flex gap-3 flex-wrap p-10">
-            
-            <div class = "tasks w-72 px-3 py-4 rounded-md bg-zinc-700">
-                <h1 class = "text-white text-3xl tracking-tighter">Some task goes here.</h1>
-                <a class ="text-blue-500 inline-block mt-3"href="">Read More</a>
-            </div>
-            <div class = "tasks w-72 px-3 py-4 rounded-md bg-zinc-700">
-                <h1 class = "text-white text-3xl tracking-tighter">Some task goes here.</h1>
-                <a class ="text-blue-500 inline-block mt-3"href="">Read More</a>
-            </div>
-            <div class = "tasks w-72 px-3 py-4 rounded-md bg-zinc-700">
-                <h1 class = "text-white text-3xl tracking-tighter">Some task goes here.</h1>
-                <a class ="text-blue-500 inline-block mt-3"href="">Read More</a>
-            </div>
-            <div class = "tasks w-72 px-3 py-4 rounded-md bg-zinc-700">
-                <h1 class = "text-white text-3xl tracking-tighter">Some task goes here.</h1>
-                <a class ="text-blue-500 inline-block mt-3"href="">Read More</a>
-            </div>
-            <h3 class ="text-zinc-600" >No task Yet</h3>
+            <% if(files.length > 0){ %>
+                <% files.forEach((val) => {%>
+                    <div class = "tasks min-w-72 px-3 py-4 rounded-md bg-zinc-700">
+                        <h1 class = "text-white text-3xl tracking-tighter"><%= val %></h1>
+                        <div class = "flex w-full justify-between items-center">
+                            <a class ="text-zinc-900" href="/edit/<%= val %>">edit filename</a>
+                            <a class ="text-blue-500 inline-block" href="/file/<%= val %>">Read More</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <h3 class ="text-zinc-600" >No task Yet</h3>
+            <% } %>
         </div>
     </div>
     
