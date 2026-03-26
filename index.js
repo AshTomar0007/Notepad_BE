@@ -15,6 +15,11 @@ app.get('/', (req,res) => {
         res.render('index',{files : files});
     });
 });
+app.post('/create', (req,res) =>{
+    fs.writeFile(`./files/${req.body.title.split(' ').join('')}.txt`, req.body.details, (err) => {
+        res.redirect('/')
+    });
+});
 app.listen(3001, () => {
     console.log("Server is running on the port 3001");
 })
